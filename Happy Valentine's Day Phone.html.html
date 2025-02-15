@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>pls say yes</title>
+  </head>
+  <body>
+    <div class="card" id="card">
+      <div class="question" id="question">
+        <p id="question-text">Do you wanna be my Valentine?</p>
+        <p id="small-text">(pls don't say no)</p>
+        <div class="buttons">
+          <button id="yes" class="btn-yes">Yes!</button>
+          <button id="no" class="btn-no">No</button>
+        </div>
+      </div>
+
+      <div class="answer" id="answer">
+        <p>Uhuuul!! Happy Valentine's Day Luu! <3</p>
+      </div>
+    </div>
+    <script>
+      let card = document.getElementById("card");
+      let questionText = document.getElementById("question-text");
+      let smallText = document.getElementById("small-text");
+      let yesButton = document.getElementById("yes");
+      let noButton = document.getElementById("no");
+      let messageIndex = 0;
+      let messages = [
+        "Are you sure?",
+        "I'll be sad.",
+        "I'll be very sad..",
+        "I'll be very very sad...",
+        "Ok, i'll stop asking."
+      ];
+
+      document.querySelector("#yes").addEventListener("click", function () {
+        let question = document.getElementById("question");
+        let message = document.getElementById("answer");
+
+        card.style.backgroundImage =
+          "url('https://media.tenor.com/Eog9WTKDMAkAAAAM/cat-and-flower.gif')";
+        question.style.display = "none";
+        message.style.display = "flex";
+      });
+
+      document.querySelector("#no").addEventListener("click", function () {
+        if (messageIndex < messages.length) {
+          questionText.innerText = messages[messageIndex];
+          messageIndex++;
+          yesButton.style.width = `${100 + messageIndex * 20}px`;
+          yesButton.style.height = `${68 + messageIndex * 10}px`;
+        } else {
+          questionText.innerText = "Last chance!";
+          yesButton.style.width = "100vw";
+          yesButton.style.height = "100vh";
+          // Mudança para "click" no botão "No"
+          noButton.addEventListener("click", moveNoButton);
+        }
+        smallText.style.display = "none"; // Agora, somente quando o botão "não" é pressionado
+      });
+
+      function moveNoButton() {
+        let width = window.innerWidth - 60;
+        let height = window.innerHeight - 50;
+
+        // Movimento aleatório do botão "no" ao ser clicado
+        noButton.style.position = "absolute";
+        noButton.style.top = Math.random() * width + "px";
+        noButton.style.left = Math.random() * height + "px";
+      }
+    </script>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #ff6eb4;
+      }
+
+      .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 600px;
+        width: 610px;
+        background-color: #fff;
+        border-radius: 19px;
+        box-shadow: 6px 5px 5px 1px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      .card > .question p {
+        font-size: 25px;
+        font-family: sans-serif;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      #small-text {
+        font-size: 11px;
+        font-family: sans-serif;
+        color: #000000;
+        margin-top: 1px;
+        font-weight: 100;
+        opacity: 0.8;
+        text-align: left;
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 26px;
+      }
+
+      .btn-yes, .btn-no {
+        height: 48px;
+        width: 100px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .btn-yes {
+        background-color: #9aff9a;
+      }
+
+      .btn-no {
+        background-color: #ff4040;
+        color: #fff;
+      }
+
+      .answer {
+        display: none;
+        text-align: center;
+      }
+
+      .answer > p {
+        font-size: 50px;
+        font-family: sans-serif;
+        font-weight: bold;
+        color: #ff6eb4;
+        text-shadow: 1px 1px #000;
+      }
+    </style>
+  </body>
+</html>
